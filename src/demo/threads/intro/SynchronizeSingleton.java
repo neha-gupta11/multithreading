@@ -2,7 +2,7 @@ package demo.threads.intro;
 
 public class SynchronizeSingleton {
     public static void main(String[] args) {
-        System.out.println("Getting first instance");
+        System.out.println("The Main method");
 
         Thread thread1=new Thread(SynchronizeSingleton::doSomething,"Thread 1");
         Thread thread2=new Thread(SynchronizeSingleton::doSomething,"Thread 2");
@@ -24,20 +24,20 @@ class  SomeService{
         System.out.println("Creating the Object for the said service....");
     }
 
-    public static SomeService getInstance(){
-        if(instance==null){
-            System.out.println("Going to lock the class "+Thread.currentThread().getName());
-            synchronized (SomeService.class){
-                System.out.println("Lock acquired by "+Thread.currentThread().getName());
-                try {
-                    Thread.sleep(4000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                instance=new SomeService();
+    public static SomeService getInstance() {
+        System.out.println("Going to lock the class " + Thread.currentThread().getName());
+        synchronized (SomeService.class) {
+            System.out.println("Lock acquired by " + Thread.currentThread().getName());
+            try {
+                Thread.sleep(4000);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            System.out.println("Releasing lock..........."+Thread.currentThread().getName());
+            if (instance == null)
+                instance = new SomeService();
         }
+        System.out.println("Releasing lock..........." + Thread.currentThread().getName());
         return instance;
     }
 }

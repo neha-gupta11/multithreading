@@ -1,5 +1,8 @@
 package demo.threads.intro;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class SynchronizeSingleton {
     public static void main(String[] args) {
         System.out.println("The Main method");
@@ -14,7 +17,7 @@ public class SynchronizeSingleton {
 
     static void doSomething(){
         SomeService service1=SomeService.getInstance();
-        System.out.println("The service reference is "+service1);
+        System.out.println("The service reference is " + service1);
     }
 }
 
